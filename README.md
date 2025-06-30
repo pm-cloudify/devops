@@ -1,5 +1,10 @@
 # Server Performance Stat
 
-use this script to get your system performance:
+here is the <a href="https://roadmap.sh/projects/server-stats">project URL</a>.
 
-<a href="https://github.com/pm-cloudify/devops/blob/main/server_performance_stats/server-stats.sh">project URL</a>
+to run this app just:
+
+    git clone https://github.com/pm-cloudify/devops.git
+    cd ./devops/server_performance_stats
+    chmod +x server-stats.sh
+    ./server-stats.sh
