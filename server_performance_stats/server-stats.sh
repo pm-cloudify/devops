@@ -11,7 +11,7 @@
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Pouya Mohammadi,
+#        AUTHOR: Pouya Mohammadi
 #  ORGANIZATION: pm-cloudify
 #       CREATED: 06/30/2025 08:43:46 AM
 #      REVISION:  ---
