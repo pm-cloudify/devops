@@ -1,11 +1,5 @@
-# Server Performance Stat
+# About devops
 
-here is the <a href="https://roadmap.sh/projects/nginx-log-analyser">project URL</a>.
+Here I have my hands on projects.
 
-to run this app just:
-
-    git clone https://github.com/pm-cloudify/devops.git
-    cd ./devops/nginx_log_analyzer
-    chmod +x nginx_log_analyzer.sh
-    mv ./nginx_log_analyzer.sh ./usr/local/bin
-    nginx_log_analyzer PATH_TO_LOG_FILE.log
+project <a href="https://roadmap.sh/projects/ssh-remote-server-setup">link</a>.
