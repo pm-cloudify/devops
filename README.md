@@ -2,4 +2,4 @@
 
 Here I have my hands on projects.
 
-project <a href="https://roadmap.sh/projects/ssh-remote-server-setup">link</a>.
+project <a href="https://roadmap.sh/projects/static-site-server">link</a>.
