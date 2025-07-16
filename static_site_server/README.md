@@ -13,3 +13,4 @@ project <a href="https://roadmap.sh/projects/static-site-server">link</a>.
     5- using scp to transfer a build nuxt app.
     6- running app on port 4000
     7- improving the app with nginx to serve as reverse proxy. (serves static and forwards app related request to nuxt server)
+    8- using rsync to sync my static contents.
