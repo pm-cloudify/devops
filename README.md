@@ -2,4 +2,4 @@
 
 Here I have my hands on projects.
 
-project <a href="https://roadmap.sh/projects/basic-dns">link</a>.
+project <a href="https://roadmap.sh/projects/simple-monitoring-dashboard">link</a>.
