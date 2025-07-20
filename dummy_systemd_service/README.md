@@ -9,6 +9,11 @@ chmod +x ./dummy.sh
 sudo mv ./dummy.sh /usr/local/bin
 sudo mv ./dummy.service /etc/systemd/system/
 sudo systemctl start dummy.service
+systemctl is-failed dummy.service
 # sudo systemctl enable dummy.service
-sudo systemctl status dummy.service
+# sudo systemctl status dummy.service
+# sudo systemctl list-units -t service --all
+# sudo systemctl stop dummy.service
+# sudo systemctl disable dummy.service
+# journalctl --catalog --pager-end --unit=dummy
 ```
