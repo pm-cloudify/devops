@@ -2,4 +2,4 @@
 
 Here I have my hands on projects.
 
-project <a href="https://roadmap.sh/projects/basic-dockerfile">link</a>.
+project <a href="https://roadmap.sh/projects/ec2-instance">link</a>.
