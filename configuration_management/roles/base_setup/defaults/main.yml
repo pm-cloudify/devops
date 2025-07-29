@@ -1,0 +1,8 @@
+---
+# defaults file for base_setup
+
+- name: Update apt cache and upgrade all packages
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: yes
+  become: yes

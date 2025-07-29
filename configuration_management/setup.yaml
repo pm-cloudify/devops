@@ -1,0 +1,11 @@
+- hosts: test_servers
+  become: yes
+  roles:
+    - role: base_setup
+      tag: base
+    - role: nginx_config
+      tag: nginx
+    - role: deploy_app
+      tag: app
+    - role: ssh_config
+      tag: ssh

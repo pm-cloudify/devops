@@ -1,0 +1,6 @@
+---
+# handlers file for base_setup
+handlers:
+  - name: Reload user session
+    ansible.builtin.debug:
+      msg: "Default shell changed to Zsh. Please log out and log back in for the changes to take effect."

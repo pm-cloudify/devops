@@ -1,0 +1,21 @@
+---
+# tasks file for base_setup
+
+# 1- install zsh
+- name: Install zsh
+  ansible.builtin.apt:
+    name: zsh
+    status: present
+
+# 2- set the default editor to zsh
+
+- name: Set zsh as default shell for the current user
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: "{{ zsh_path_result.stdout }}"
+  notify: Reload user session
+
+  handlers:
+    - name: Reload user session
+      ansible.builtin.debug:
+        msg: "Default shell changed to Zsh. Please log out and log back in for the changes to take effect."
