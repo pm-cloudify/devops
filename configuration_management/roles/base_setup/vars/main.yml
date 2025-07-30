@@ -1,6 +1,2 @@
 ---
 # vars file for base_setup
-- name: Find the path to zsh
-  ansible.builtin.command: which zsh
-  register: zsh_path_result
-  changed_when: false
