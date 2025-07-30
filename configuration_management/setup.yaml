@@ -2,10 +2,10 @@
   become: yes
   roles:
     - role: base_setup
-      tag: base
+      tags: base
     - role: nginx_config
-      tag: nginx
+      tags: nginx
     - role: deploy_app
-      tag: app
+      tags: app
     - role: ssh_config
-      tag: ssh
+      tags: ssh
