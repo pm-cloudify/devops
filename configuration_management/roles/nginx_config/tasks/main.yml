@@ -1,2 +1,32 @@
 ---
 # tasks file for nginx_config
+
+- name: Install nginx
+  ansible.builtin.apt:
+    name: nginx
+
+- name: Enable nginx
+  ansible.builtin.shell: "systemctl enable nginx"
+  become: true
+
+- name: Add my virtual host to nginx
+  ansible.builtin.template:
+    src: my.nginx.conf
+    dest: /etc/nginx/conf.d/my.nginx.conf
+    owner: root
+    group: root
+    mode: "0644"
+  become: true
+
+- name: Reload Nginx
+  ansible.builtin.shell: "systemctl restart nginx.service"
+  become: true
+
+- name: Get Status from nginx
+  ansible.builtin.shell: "systemctl status nginx"
+  register: nginx_status
+  become: true
+
+- name: Display status info
+  ansible.builtin.debug:
+    var: nginx_status.stdout_lines
