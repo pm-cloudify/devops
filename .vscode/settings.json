@@ -1,3 +1,6 @@
 {
-  "ansible.python.interpreterPath": "/usr/bin/python3"
+  "ansible.python.interpreterPath": "/usr/bin/python3",
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///home/pouya/Desktop/pm-cloudify/devops/configuration_management/roles/nginx_config/tasks/install.yaml"
+  }
 }

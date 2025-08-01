@@ -1,2 +1,5 @@
 ---
 # defaults file for nginx_config
+nginx_package_name: nginx
+nginx_listen_port: 82
+nginx_server_name: testy.com

@@ -1,0 +1,28 @@
+- name: Deploy nginx config
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/ansible_test.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload nginx
+  become: yes
+
+- name: Make sure proper dir exists for root of your VH
+  ansible.builtin.file:
+    path: "{{ nginx_app_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+  become: yes
+
+- name: Deploy base static file
+  ansible.builtin.copy:
+    src: index.html
+    dest: "{{ nginx_app_root }}/index.html"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload nginx
+  become: yes

@@ -1,2 +1,3 @@
 ---
 # vars file for nginx_config
+nginx_app_root: /var/www/ansible

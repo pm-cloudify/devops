@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: test_hosts
+  gather_facts: yes
   roles:
     - nginx_config

@@ -1,0 +1,13 @@
+- name: Install nginx
+  ansible.builtin.apt:
+    name: "{{ nginx_package_name }}"
+    state: present
+    update_cache:
+  become: yes
+
+- name: Enable nginx
+  ansible.builtin.service:
+    name: "{{ nginx_package_name }}"
+    enabled: true
+    state: stopped
+  become: yes

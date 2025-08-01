@@ -1,2 +1,2 @@
-localhost
-
+[test_hosts]
+pm_linux_server

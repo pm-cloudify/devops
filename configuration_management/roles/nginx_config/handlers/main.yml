@@ -1,2 +1,8 @@
 ---
 # handlers file for nginx_config
+
+- name: Reload nginx
+  ansible.builtin.service:
+    name: "{{ nginx_package_name }}"
+    state: reloaded
+  become: yes
