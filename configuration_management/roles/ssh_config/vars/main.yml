@@ -1,2 +1,5 @@
 ---
 # vars file for ssh_config
+ansible_user: pouya
+# todo: I think there is more secure why to config pass phrase
+ssh_pass_phrase: can't tell you honey <3

@@ -1,2 +1,22 @@
 ---
 # tasks file for ssh_config
+
+- name: Generate ssh key-pair
+  community.crypto.openssh_keypair:
+    path: "/home/{{ ansible_user }}/.ssh/test_ansible"
+    type: rsa
+    size: 4096
+    state: present
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    force: no
+    passphrase: "{{ ssh_pass_phrase }}"
+  delegate_to: localhost
+  become: no
+  become_user: "{{ ansible_user }}"
+
+- name: Append public key to the host
+  ansible.builtin.authorized_key:
+    user: "{{ remote_user }}"
+    state: present
+    key: "/home/{{ ansible_user }}/.ssh/test_ansible.pub"
