@@ -1,5 +1,4 @@
 - hosts: test_servers
-  become: yes
   roles:
     - role: base_setup
       tags: base
