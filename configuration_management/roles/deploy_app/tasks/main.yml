@@ -1,2 +1,24 @@
 ---
 # tasks file for deploy_app
+
+- name: Cleanup contents
+  ansible.builtin.file:
+    path: "{{ app_root_on_host }}"
+    state: absent
+  become: yes
+
+- name: Create a fresh one
+  ansible.builtin.file:
+    path: "{{ app_root_on_host }}"
+    owner: www-data
+    group: www-data
+    state: directory
+    mode: "0655"
+  become: yes
+
+- name: Unarchive app on host
+  ansible.builtin.unarchive:
+    src: "{{ archived_app_path }}"
+    dest: "{{ app_root_on_host }}"
+    remote_src: no
+  notify: Reload nginx

@@ -1,2 +1,4 @@
 ---
 # vars file for deploy_app
+archived_app_path: /home/pouya/Documents/test_app.tar.gz
+app_root_on_host: /var/www/ansible
