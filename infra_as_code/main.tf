@@ -116,6 +116,7 @@ resource "arvan_abrak" "built_by_terraform" {
   ]
   security_groups = [arvan_security_group.terraform_security_group.id]
   volumes         = [arvan_volume.terraform_volume.id]
+  ssh_key_name    = var.ssh_key
 }
 
 output "instances" {

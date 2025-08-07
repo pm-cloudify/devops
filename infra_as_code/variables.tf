@@ -33,3 +33,10 @@ variable "chosen_plan_id" {
   description = "The chosen ID of plan"
   default     = "g1-2-1-0"
 }
+
+variable "ssh_key" {
+  type        = string
+  description = "Created SSH key with panel"
+  default     = ""
+  sensitive   = true
+}
