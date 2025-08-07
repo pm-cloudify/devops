@@ -13,13 +13,13 @@ variable "region" {
 variable "distro_name" {
   type        = string
   description = " The chosen distro name for image"
-  default     = "debian"
+  default     = "ubuntu"
 }
 
 variable "distro_version" {
   type        = string
   description = "The chosen release for image"
-  default     = "12"
+  default     = "24.04"
 }
 
 variable "chosen_network_name" {
@@ -31,12 +31,11 @@ variable "chosen_network_name" {
 variable "chosen_plan_id" {
   type        = string
   description = "The chosen ID of plan"
-  default     = "g1-2-1-0"
+  default     = "g5-1-1-0"
 }
 
 variable "ssh_key" {
   type        = string
   description = "Created SSH key with panel"
   default     = ""
-  sensitive   = true
 }
