@@ -17,7 +17,7 @@ Followings are things I usually do for creating a basic worker node, which I mai
         5- install your tools (I use zsh (+oh-my-zsh) and vim)
     5- congrats, its done.
 
-### My do these as well
+### May do these as well
 
     1- config firewall(iptables) setting, (I only expose using ports like 22, and 80 for nginx)
     2- might config some dns for inner use with bind9.
