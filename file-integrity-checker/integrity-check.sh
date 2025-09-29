@@ -51,7 +51,7 @@ init() {
     fi
 
     # Generate a unique file name for the hash storage based on the target's name
-    local hash_file="$HASH_BASE_PATH$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
+    local hash_file="$BaseHashStore$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
 
     echo "Generating hash for: $target_path"
     generate_hash "$target_path" "$hash_file"
@@ -69,7 +69,7 @@ check() {
     fi
 
     # Find the most recent hash file for the target (based on date in file name)
-    local hash_file=$(ls -t "$HASH_BASE_PATH"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
+    local hash_file=$(ls -t "$BaseHashStore"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
 
     if [ -z "$hash_file" ]; then
         echo -e "$RED No hash file found for: $target_path\n Please initialize the hash first by: $NC \n    • ./integrity-check init $target_path $NC"
@@ -98,7 +98,7 @@ update() {
     echo -e "$BLUE Updating hash list for: $target_path $NC"
     
     # Find the most recent hash file for the target (based on the target's name)
-    local old_hash_file=$(ls -t "$HASH_BASE_PATH"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
+    local old_hash_file=$(ls -t "$BaseHashStore"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
 
     # If no hash file exists, prompt the user to initialize the hash first
     if [ -z "$old_hash_file" ]; then
@@ -111,7 +111,7 @@ update() {
     rm -f "$old_hash_file"
 
     # Generate a new hash file with a timestamp-based name
-    local hash_file="$HASH_BASE_PATH$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
+    local hash_file="$BaseHashStore$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
 
     generate_hash "$target_path" "$hash_file"
     echo -e "$GREEN Hash list updated successfully for: $target_path $NC"
@@ -127,9 +127,7 @@ _help() {
 
 # cmd run
 
-checkPath "$path"
-
-case "$1" in 
+case "$cmd" in 
     init)
         init "$path"
         ;;
