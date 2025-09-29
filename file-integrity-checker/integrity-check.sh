@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# I have developed similar script but this one is kinda better at displaying information: https://github.com/aj-seven/DevOps-Projects/blob/master/file-integrity-checker/integrity-check#L18
+
 # Colors
 BLUE="\033[34m"
 GREEN="\033[32m"
