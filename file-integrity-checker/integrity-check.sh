@@ -1,9 +1,4 @@
-#!/usr/bin/bash
-
-# Input commands
-cmd="$1"
-path="$2"
-
+#!/bin/bash
 
 # Colors
 BLUE="\033[34m"
@@ -11,30 +6,31 @@ GREEN="\033[32m"
 RED="\033[31m"
 NC="\033[0m"
 
-# Base of hash
-BaseHashStore="/usr/local/share/hash/store/"
+# Default directory for storing hashes
+HASH_BASE_PATH=~/.local/share/hash/
 
-if [ ! -d "$BaseHashStore" ]; then
-    mkdir -p "$BaseHashStore"
+# Ensure the hash base path exists
+if [ ! -d "$HASH_BASE_PATH" ]; then
+    mkdir -p "$HASH_BASE_PATH"
 fi
 
-# ********** Functions *************
-
-# generates hash for a file or directory. then save hashes inside given file
-generateHash(){
-    local target="$1"
+# Function to generate the hash for a file or directory
+generate_hash() {
+    local target_path="$1"
     local hash_file="$2"
 
-    if [ -d "$target" ]; then
-        find "$target" -type f | xargs sha256sum > "$hash_file" 2>/dev/null
-    elif [ -f "$target" ]; then
-        sha256sum "$target" > "$hash_file"
+    if [ -d "$target_path" ]; then
+        # If it's a directory, hash all files within the directory
+        find "$target_path" -type f | xargs sha256sum > "$hash_file" 2>/dev/null
+    elif [ -f "$target_path" ]; then
+        # If it's a single file, hash it directly
+        sha256sum "$target_path" > "$hash_file"
     else
         echo -e "$RED The specified path is neither a file nor a directory. $NC"
     fi
 }
 
-# inits hash generation
+# Function to initialize hash generation
 init() {
     echo -e "$BLUE Init mode $NC"
 
@@ -51,14 +47,14 @@ init() {
     fi
 
     # Generate a unique file name for the hash storage based on the target's name
-    local hash_file="$BaseHashStore$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
+    local hash_file="$HASH_BASE_PATH$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
 
     echo "Generating hash for: $target_path"
     generate_hash "$target_path" "$hash_file"
     echo -e "$GREEN Hashes saved successfully to: $hash_file $NC"
 }
 
-# check hash integrity
+# Function to check hashes against the stored .sha256sum file
 check() {
     echo -e "$BLUE Check mode $NC"
     
@@ -69,7 +65,7 @@ check() {
     fi
 
     # Find the most recent hash file for the target (based on date in file name)
-    local hash_file=$(ls -t "$BaseHashStore"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
+    local hash_file=$(ls -t "$HASH_BASE_PATH"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
 
     if [ -z "$hash_file" ]; then
         echo -e "$RED No hash file found for: $target_path\n Please initialize the hash first by: $NC \n    • ./integrity-check init $target_path $NC"
@@ -80,7 +76,7 @@ check() {
     sha256sum -c "$hash_file" || echo -e "$RED Hash mismatch found $NC"
 }
 
-# update hashes
+# Function to update the hash list
 update() {
     echo -e "$BLUE Update mode $NC"
 
@@ -98,7 +94,7 @@ update() {
     echo -e "$BLUE Updating hash list for: $target_path $NC"
     
     # Find the most recent hash file for the target (based on the target's name)
-    local old_hash_file=$(ls -t "$BaseHashStore"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
+    local old_hash_file=$(ls -t "$HASH_BASE_PATH"$(basename "$target_path")-*.sha256sum 2>/dev/null | head -n 1)
 
     # If no hash file exists, prompt the user to initialize the hash first
     if [ -z "$old_hash_file" ]; then
@@ -111,33 +107,29 @@ update() {
     rm -f "$old_hash_file"
 
     # Generate a new hash file with a timestamp-based name
-    local hash_file="$BaseHashStore$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
+    local hash_file="$HASH_BASE_PATH$(basename "$target_path")-$(date "+%Y-%m-%d_%H-%M-%S").sha256sum"
 
     generate_hash "$target_path" "$hash_file"
     echo -e "$GREEN Hash list updated successfully for: $target_path $NC"
 }
 
 
-# help message
 _help() {
     echo -e "Invalid option: $1 \n    • Use 'init', 'update', or 'check'."
 }
 
-# ********** End of functions 
-
-# cmd run
-
-case "$cmd" in 
+# Main case to handle different modes
+case "$1" in
     init)
-        init "$path"
+        init "$2"
         ;;
     check)
-        check "$path"
+        check "$2"
         ;;
     update)
-        init "$path"
+        update "$2"
         ;;
     *)
-        _help "$cmd"
+        _help "$1"
         ;;
 esac
